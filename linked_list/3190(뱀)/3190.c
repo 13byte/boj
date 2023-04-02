@@ -79,8 +79,7 @@ bool move_snake(t_node **head, int dx, int dy, int **matrix, int N)
 
 int main(void)
 {
-	int N, K, L, X, time = 0;
-	char C;
+	int N, K, L, time = 0;
 	int **matrix;
 
 	scanf("%d", &N);
@@ -108,50 +107,40 @@ int main(void)
 	head->prev = NULL;
 	head->next = NULL;
 	scanf("%d", &L);
-	int t = 0;
 	int dir = 1;
-	int turn_time[101] = {
-		0,
-	};
-	char turn_dir[101] = {
-		0,
-	};
-	for (int i = 0; i < L; i++)
-	{
-		scanf("%d %c", &turn_time[i], &turn_dir[i]);
-	}
+	int next_turn_time = 0;
+    char turn_dir;
+    for (int i = 0; i < L; i++)
+    {
+        scanf("%d %c", &next_turn_time, &turn_dir);
+        while (time < next_turn_time)
+        {
+            time++;
+            if (!move_snake(&head, dx[dir], dy[dir], matrix, N))
+            {
+                printf("%d\n", time);
+                return 0;
+            }
+        }
+        if (turn_dir == 'L')
+        {
+            dir = (dir + 3) % 4;
+        }
+        else if (turn_dir == 'D')
+        {
+            dir = (dir + 1) % 4;
+        }
+    }
 
-	int next_turn_time = turn_time[0];
-	int turn_index = 0;
-	while (true)
-	{
-		if (time == next_turn_time)
-		{
-			if (turn_dir[turn_index] == 'L')
-			{
-				dir = (dir + 3) % 4;
-			}
-			else if (turn_dir[turn_index] == 'D')
-			{
-				dir = (dir + 1) % 4;
-			}
-			turn_index++;
-			if (turn_index < L)
-			{
-				next_turn_time = turn_time[turn_index];
-			}
-		}
+    while (true)
+    {
+        time++;
+        if (!move_snake(&head, dx[dir], dy[dir], matrix, N))
+        {
+            printf("%d\n", time);
+            return 0;
+        }
+    }
 
-		time++;
-		int new_x = head->x + dx[dir];
-		int new_y = head->y + dy[dir];
-
-		if (!move_snake(&head, dx[dir], dy[dir], matrix, N))
-		{
-			printf("%d\n", time);
-			return 0;
-		}
-	}
-
-	return 0;
+    return 0;
 }
