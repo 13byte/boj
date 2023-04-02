@@ -36,18 +36,18 @@ bool move_snake(t_node **head, int dx, int dy, int **matrix, int N)
 	int new_y = (*head)->y + dy;
 
 	if (new_x < 0 || new_x >= N || new_y < 0 || new_y >= N)
-		return false;
+		return (false);
 
 	t_node *temp = *head;
 	while (temp->next != NULL)
 	{
 		if (temp->x == new_x && temp->y == new_y)
-			return false;
+			return (false);
 		temp = temp->next;
 	}
 
 	if (temp->x == new_x && temp->y == new_y)
-		return false;
+		return (false);
 
 	if (matrix[new_x][new_y] == 2)
 	{
@@ -74,7 +74,7 @@ bool move_snake(t_node **head, int dx, int dy, int **matrix, int N)
 			matrix[tail->x][tail->y] = 0;
 		}
 	}
-	return true;
+	return (true);
 }
 
 int main(void)
@@ -119,7 +119,7 @@ int main(void)
 			if (!move_snake(&head, dx[dir], dy[dir], matrix, N))
 			{
 				printf("%d\n", time);
-				return 0;
+				return (0);
 			}
 		}
 		if (turn_dir == 'L')
@@ -138,9 +138,9 @@ int main(void)
 		if (!move_snake(&head, dx[dir], dy[dir], matrix, N))
 		{
 			printf("%d\n", time);
-			return 0;
+			return (0);
 		}
 	}
 
-	return 0;
+	return (0);
 }
