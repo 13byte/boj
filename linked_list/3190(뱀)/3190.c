@@ -109,38 +109,38 @@ int main(void)
 	scanf("%d", &L);
 	int dir = 1;
 	int next_turn_time = 0;
-    char turn_dir;
-    for (int i = 0; i < L; i++)
-    {
-        scanf("%d %c", &next_turn_time, &turn_dir);
-        while (time < next_turn_time)
-        {
-            time++;
-            if (!move_snake(&head, dx[dir], dy[dir], matrix, N))
-            {
-                printf("%d\n", time);
-                return 0;
-            }
-        }
-        if (turn_dir == 'L')
-        {
-            dir = (dir + 3) % 4;
-        }
-        else if (turn_dir == 'D')
-        {
-            dir = (dir + 1) % 4;
-        }
-    }
+	char turn_dir;
+	for (int i = 0; i < L; i++)
+	{
+		scanf("%d %c", &next_turn_time, &turn_dir);
+		while (time < next_turn_time)
+		{
+			time++;
+			if (!move_snake(&head, dx[dir], dy[dir], matrix, N))
+			{
+				printf("%d\n", time);
+				return 0;
+			}
+		}
+		if (turn_dir == 'L')
+		{
+			dir = (dir + 3) % 4;
+		}
+		else if (turn_dir == 'D')
+		{
+			dir = (dir + 1) % 4;
+		}
+	}
 
-    while (true)
-    {
-        time++;
-        if (!move_snake(&head, dx[dir], dy[dir], matrix, N))
-        {
-            printf("%d\n", time);
-            return 0;
-        }
-    }
+	while (true)
+	{
+		time++;
+		if (!move_snake(&head, dx[dir], dy[dir], matrix, N))
+		{
+			printf("%d\n", time);
+			return 0;
+		}
+	}
 
-    return 0;
+	return 0;
 }
