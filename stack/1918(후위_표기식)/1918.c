@@ -107,7 +107,7 @@ t_node *pop(t_stack *stack)
 	{
 		t_node *cursor = stack->list;
 
-		if (cursor != NULL && cursor->next != stack->top)
+		while (cursor != NULL && cursor->next != stack->top)
 			cursor = cursor->next;
 		stack->top = cursor;
 		stack->top->next = NULL;
@@ -168,7 +168,7 @@ void get_postfix(char *infix, char *postfix)
 		}
 	}
 
-	while (stack->list != NULL)
+	while (!(is_empty(stack)))
 	{
 		t_node *popped = pop(stack);
 
