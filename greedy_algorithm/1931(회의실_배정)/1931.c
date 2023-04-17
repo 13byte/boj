@@ -17,7 +17,7 @@ int compare(const void *a, const void *b)
 	return (m1->end - m2->end);
 }
 
-int main(void)
+int main()
 {
 	int N;
 	int count = 0;
