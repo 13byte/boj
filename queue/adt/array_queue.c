@@ -23,32 +23,6 @@ int get_size(t_queue *queue);
 bool is_empty(t_queue *queue);
 bool is_full(t_queue *queue);
 
-int main(void)
-{
-    t_queue *queue = create_queue(10);
-    int data;
-
-    for (int i = 1; i <= 5; ++i)
-        en_queue(queue, i);
-    for (int i = 1; i <= 3; ++i)
-    {
-        de_queue(queue, &data);
-        printf("Dequeue : %d, Front : %d, Rear : %d\n", data, queue->front, queue->rear);
-    }
-    for (int i = 100; !is_full(queue); ++i)
-        en_queue(queue, i);
-
-    printf("Capacity : %d, Size : %d\n\n", queue->capacity, get_size(queue));
-
-    while (!is_empty(queue))
-    {
-        de_queue(queue, &data);
-        printf("Dequeue : %d, Front : %d, Rear : %d\n", data, queue->front, queue->rear);
-    }
-    destroy_queue(queue);
-    return (0);
-}
-
 t_queue *create_queue(int capacity)
 {
     t_queue *queue = (t_queue *)malloc(sizeof(t_queue));
