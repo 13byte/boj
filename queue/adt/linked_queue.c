@@ -120,7 +120,6 @@ typedef struct s_queue
 } t_queue;
 
 t_queue *create_queue(void);
-static t_node *create_node(int data);
 void destroy_queue(t_queue *queue);
 bool en_queue(t_queue *queue, int new_data);
 bool de_queue(t_queue *queue, int *data);
@@ -137,20 +136,6 @@ t_queue *create_queue(void)
     return (new_queue);
 }
 
-static t_node *create_node(int data)
-{
-    t_node *new_node = (t_node *)malloc(sizeof(t_node));
-
-    if (!new_node)
-    {
-        free(new_node);
-        return (NULL);
-    }
-    new_node->data = data;
-    new_node->next = NULL;
-    return (new_node);
-}
-
 void destroy_queue(t_queue *queue)
 {
     if (!queue)
@@ -164,9 +149,15 @@ void destroy_queue(t_queue *queue)
 
 bool en_queue(t_queue *queue, int new_data)
 {
-    t_node *new_node = create_node(new_data);
-    if (!queue || !new_node)
+    if (!queue)
         return (false);
+
+    t_node *new_node = (t_node *)malloc(sizeof(t_node));
+    if (!new_node)
+        return (false);
+
+    new_node->data = new_data;
+    new_node->next = NULL;
 
     if (is_empty(queue))
         queue->front = new_node;
