@@ -17,8 +17,8 @@ typedef struct s_queue
 
 t_queue *create_queue(int capacity);
 void destroy_queue(t_queue *queue);
-bool en_queue(t_queue *queue, int data);
-bool de_queue(t_queue *queue, int *data);
+bool push_queue(t_queue *queue, int data);
+bool pop_queue(t_queue *queue, int *data);
 int get_size(t_queue *queue);
 bool is_empty(t_queue *queue);
 bool is_full(t_queue *queue);
@@ -39,7 +39,7 @@ void destroy_queue(t_queue *queue)
     free(queue);
 }
 
-bool en_queue(t_queue *queue, int data)
+bool push_queue(t_queue *queue, int data)
 {
     if (is_full(queue))
         return (false);
@@ -48,7 +48,7 @@ bool en_queue(t_queue *queue, int data)
     return (true);
 }
 
-bool de_queue(t_queue *queue, int *data)
+bool pop_queue(t_queue *queue, int *data)
 {
     if (is_empty(queue))
         return (false);

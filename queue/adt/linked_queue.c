@@ -20,8 +20,8 @@ typedef struct s_queue
 t_queue *create_queue(void);
 static t_node *create_node(const char *data);
 void destroy_queue(t_queue *queue);
-bool en_queue(t_queue *queue, const char *new_data);
-bool de_queue(t_queue *queue, char **data);
+bool push_queue(t_queue *queue, const char *new_data);
+bool pop_queue(t_queue *queue, char **data);
 bool is_empty(const t_queue *queue);
 int queue_size(const t_queue *queue);
 
@@ -54,12 +54,12 @@ void destroy_queue(t_queue *queue)
         return;
 
     char *data;
-    while (de_queue(queue, &data))
+    while (pop_queue(queue, &data))
         free(data);
     free(queue);
 }
 
-bool en_queue(t_queue *queue, const char *new_data)
+bool push_queue(t_queue *queue, const char *new_data)
 {
     t_node *new_node = create_node(new_data);
     if (!queue || !new_data || !new_node)
@@ -75,7 +75,7 @@ bool en_queue(t_queue *queue, const char *new_data)
     return (true);
 }
 
-bool de_queue(t_queue *queue, char **data)
+bool pop_queue(t_queue *queue, char **data)
 {
     if (!queue || is_empty(queue) || !data)
         return (false);
@@ -101,8 +101,8 @@ int queue_size(const t_queue *queue)
     return (queue ? queue->size : -1);
 }
 
-// int
 #include <stdio.h>
+#include <string.h>
 #include <stdlib.h>
 #include <stdbool.h>
 
@@ -121,8 +121,8 @@ typedef struct s_queue
 
 t_queue *create_queue(void);
 void destroy_queue(t_queue *queue);
-bool en_queue(t_queue *queue, int new_data);
-bool de_queue(t_queue *queue, int *data);
+bool push_queue(t_queue *queue, int new_data);
+bool pop_queue(t_queue *queue, int *data);
 bool is_empty(const t_queue *queue);
 int queue_size(const t_queue *queue);
 
@@ -142,12 +142,12 @@ void destroy_queue(t_queue *queue)
         return;
 
     int data;
-    while (de_queue(queue, &data))
+    while (pop_queue(queue, &data))
         ;
     free(queue);
 }
 
-bool en_queue(t_queue *queue, int new_data)
+bool push_queue(t_queue *queue, int new_data)
 {
     if (!queue)
         return (false);
@@ -169,7 +169,7 @@ bool en_queue(t_queue *queue, int new_data)
     return (true);
 }
 
-bool de_queue(t_queue *queue, int *data)
+bool pop_queue(t_queue *queue, int *data)
 {
     if (!queue || is_empty(queue) || !data)
         return (false);
