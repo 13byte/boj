@@ -18,6 +18,7 @@ t_stack *create_stack(int capacity);
 void push(t_stack *stack, int new_data);
 int pop(t_stack *stack);
 void destroy_stack(t_stack *stack);
+int is_empty(t_stack *stack);
 
 int main(void)
 {
@@ -76,4 +77,9 @@ void destroy_stack(t_stack *stack)
 {
 	free(stack->nodes);
 	free(stack);
+}
+
+int is_empty(t_stack *stack)
+{
+	return (stack->top == -1);
 }
