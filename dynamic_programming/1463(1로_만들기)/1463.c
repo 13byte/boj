@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-int memo[1000001];
+int dp[1000001];
 
 int ft_min(int a, int b)
 {
@@ -12,15 +12,15 @@ int main(void)
 	int n;
 
 	scanf("%d\n", &n);
-	memo[1] = 0;
+	dp[1] = 0;
 	for (int i = 2; i <= n; ++i)
 	{
-		memo[i] = memo[i - 1] + 1;
+		dp[i] = dp[i - 1] + 1;
 		if (i % 2 == 0)
-			memo[i] = ft_min(memo[i], memo[i / 2] + 1);
+			dp[i] = ft_min(dp[i], dp[i / 2] + 1);
 		if (i % 3 == 0)
-			memo[i] = ft_min(memo[i], memo[i / 3] + 1);
+			dp[i] = ft_min(dp[i], dp[i / 3] + 1);
 	}
-	printf("%d\n", memo[n]);
+	printf("%d\n", dp[n]);
 	return (0);
 }
