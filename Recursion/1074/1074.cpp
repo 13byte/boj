@@ -6,6 +6,7 @@ int recv(int n, int r, int c)
 	if (n == 0)
 		return 0;
 	int half = 1 << (n - 1);
+	cout << half << '\n'; 
 	if (r < half && c < half)
 		return recv(n - 1, r, c);
 	if (r < half && c >= half)
