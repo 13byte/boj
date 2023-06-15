@@ -4,10 +4,10 @@ using namespace std;
 int N, cnt;
 int board[20];
 
-bool promising(int row)
+bool promising(int cur_row)
 {
-	for (int col = 0; col < row; ++col)
-		if (board[row] == board[col] || row - col == abs(board[row] - board[col]))
+	for (int prev_row = 0; prev_row < cur_row; ++prev_row)
+		if (board[cur_row] == board[prev_row] || cur_row - prev_row == abs(board[cur_row] - board[prev_row]))
 			return (false);
 	return (true);
 }
