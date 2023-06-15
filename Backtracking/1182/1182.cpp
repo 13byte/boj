@@ -3,7 +3,7 @@ using namespace std;
 
 int n, s;
 int arr[30];
-int cnt = 0;
+int cnt;
 
 void dfs(int cur, int tot)
 {
